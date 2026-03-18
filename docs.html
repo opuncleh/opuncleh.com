@@ -304,16 +304,77 @@
     /* Lobster emoji */
     .lobster { font-size: 1.2em; }
 
+    /* Mobile menu button */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 1.5rem;
+      padding: 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
     /* Responsive */
     @media (max-width: 900px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+      .header-nav {
+        display: none;
+      }
       .docs-layout {
         grid-template-columns: 1fr;
       }
       .sidebar {
         display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 99;
+        height: calc(100vh - 60px);
+        overflow-y: auto;
+        background: var(--bg);
+        border-right: none;
+        padding: 1rem;
+      }
+      .sidebar.open {
+        display: block;
       }
       .main-content {
-        padding: 1.5rem;
+        padding: 1.5rem 1rem;
+      }
+      .main-content h1 {
+        font-size: 1.75rem;
+      }
+      .main-content h2 {
+        font-size: 1.35rem;
+      }
+      .main-content h3 {
+        font-size: 1.1rem;
+      }
+      pre {
+        font-size: 0.75rem;
+        padding: 0.75rem;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+      table {
+        font-size: 0.8rem;
+      }
+      th, td {
+        padding: 0.5rem;
+      }
+      .install-tabs {
+        flex-wrap: wrap;
+      }
+      .install-tab {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.75rem;
       }
     }
   </style>
@@ -330,6 +391,7 @@
         <a href="docs.html">Doks</a>
         <a href="https://github.com/opuncleh/opuncleh">GitHubb</a>
       </nav>
+      <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
     </div>
   </header>
 
@@ -1844,9 +1906,17 @@ opuncleh models auth setup-token --provider anthropic</code></pre>
         if (target) {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           history.pushState(null, null, this.getAttribute('href'));
+          // Close mobile menu after clicking a link
+          document.querySelector('.sidebar').classList.remove('open');
         }
       });
     });
+
+    // Mobile menu toggle
+    function toggleMenu() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('open');
+    }
   </script>
 </body>
 </html>
