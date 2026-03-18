@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opuncleh Doks 🦞</title>
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --bg-code: rgba(0, 0, 0, 0.5);
+      --text: #fff;
+      --text-muted: #999;
+      --accent: #ff3366;
+      --accent-glow: rgba(255, 51, 102, 0.3);
+      --accent-secondary: #00ff88;
+      --border: rgba(255, 255, 255, 0.1);
+      --success: #00ff88;
+      --warning: #fbbf24;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="28" font-size="28">🦞</text></svg>') 16 16, auto;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Header */
+    header {
+      background: rgba(10, 14, 26, 0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo-section h1 {
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .header-nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .header-nav a {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .header-nav a:hover { color: #fff; text-decoration: none; }
+
+    /* Layout */
+    .docs-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      max-width: 1400px;
+      margin: 0 auto;
+      min-height: calc(100vh - 60px);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: var(--bg-card);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+    .sidebar-section {
+      margin-bottom: 1.5rem;
+    }
+    .sidebar-section h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-section ul {
+      list-style: none;
+    }
+    .sidebar-section li {
+      margin-bottom: 0.25rem;
+    }
+    .sidebar-section a {
+      display: block;
+      padding: 0.4rem 0.75rem;
+      color: var(--text-muted);
+      border-radius: 6px;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    .sidebar-section a:hover {
+      background: rgba(255, 51, 102, 0.1);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Main content */
+    .main-content {
+      padding: 3rem;
+      max-width: 900px;
+    }
+    .main-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #fff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .main-content h2 {
+      font-size: 1.75rem;
+      margin: 3rem 0 1rem;
+      color: var(--text);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .main-content h3 {
+      font-size: 1.25rem;
+      margin: 2rem 0 0.75rem;
+      color: var(--accent);
+    }
+    .main-content h4 {
+      font-size: 1.1rem;
+      margin: 1.5rem 0 0.5rem;
+      color: var(--text);
+    }
+    .main-content p {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .main-content ul, .main-content ol {
+      margin: 1rem 0 1rem 1.5rem;
+    }
+    .main-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Code blocks */
+    pre {
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 0.875rem;
+      color: var(--accent-secondary);
+    }
+    code {
+      font-family: 'Monaco', 'Courier New', monospace;
+      background: var(--bg-code);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: var(--accent-secondary);
+    }
+    pre code {
+      background: none;
+      padding: 0;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section:last-child {
+      border-bottom: none;
+    }
+
+    /* Cards */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: all 0.2s;
+    }
+    .feature-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+    .feature-card h4 {
+      color: var(--accent);
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+    }
+    .feature-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    th {
+      background: var(--bg-card);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    tr:hover {
+      background: rgba(255, 51, 102, 0.05);
+    }
+
+    /* Alerts */
+    .alert {
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border-left: 4px solid;
+    }
+    .alert-info {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: #3b82f6;
+    }
+    .alert-warning {
+      background: rgba(251, 191, 36, 0.1);
+      border-color: var(--warning);
+    }
+    .alert-success {
+      background: rgba(0, 255, 136, 0.1);
+      border-color: var(--success);
+    }
+
+    /* Install tabs */
+    .install-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .install-tab {
+      padding: 0.5rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.875rem;
+    }
+    .install-tab.active {
+      background: var(--accent-secondary);
+      color: #000;
+      border-color: var(--accent-secondary);
+    }
+    .install-tab:hover:not(.active) {
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .install-content {
+      display: none;
+    }
+    .install-content.active {
+      display: block;
+    }
+
+    /* Lobster emoji */
+    .lobster { font-size: 1.2em; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .docs-layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        display: none;
+      }
+      .main-content {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo-section">
+        <span style="font-size: 2rem;">🦞</span>
+        <h1>Opuncleh Doks</h1>
+      </div>
+      <nav class="header-nav">
+        <a href="index.html">Hoem</a>
+        <a href="docs.html">Doks</a>
+        <a href="https://github.com/opuncleh/opuncleh">GitHubb</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>🚀 Getin Strtd</h3>
+        <ul>
+          <li><a href="#overview">Ovrview</a></li>
+          <li><a href="#install">Instalayshun</a></li>
+          <li><a href="#quick-setup">Quik Setup</a></li>
+          <li><a href="#onboarding">Onbording</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>🏗️ Arkitekchur</h3>
+        <ul>
+          <li><a href="#gateway-arch">Gatewei Arkitekchur</a></li>
+          <li><a href="#agent-runtime">Ajent Runtiem</a></li>
+          <li><a href="#agent-loop">Ajent Lupe</a></li>
+          <li><a href="#system-prompt">Sistem Prommp</a></li>
+          <li><a href="#context">Kontekst</a></li>
+          <li><a href="#agent-workspace">Ajent Werkspays</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>💬 Chanulz</h3>
+        <ul>
+          <li><a href="#channels-overview">Ovrview</a></li>
+          <li><a href="#whatsapp">WutsApp</a></li>
+          <li><a href="#telegram">Telegrem</a></li>
+          <li><a href="#discord">Diskord</a></li>
+          <li><a href="#slack">Slak</a></li>
+          <li><a href="#signal">Signul</a></li>
+          <li><a href="#imessage">iMesij</a></li>
+          <li><a href="#msteams">MS Teems</a></li>
+          <li><a href="#more-channels">Moar Chanulz</a></li>
+          <li><a href="#channel-config">Chanul Konfig</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>🛠️ Toolz</h3>
+        <ul>
+          <li><a href="#tools-overview">Ovrview</a></li>
+          <li><a href="#exec">Eksek Tool</a></li>
+          <li><a href="#browser">Browzr</a></li>
+          <li><a href="#web-tools">Web Toolz</a></li>
+          <li><a href="#canvas">Kanvus</a></li>
+          <li><a href="#nodes-tool">Noedz Tool</a></li>
+          <li><a href="#sessions-tools">Seshun Toolz</a></li>
+          <li><a href="#cron-tool">Kron Tool</a></li>
+          <li><a href="#gateway-tool">Gatewei Tool</a></li>
+          <li><a href="#image-tool">Imij Tool</a></li>
+          <li><a href="#message-tool">Mesij Tool</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>🧠 Ajent Stuffz</h3>
+        <ul>
+          <li><a href="#multi-agent">Multi-Ajent Rooting</a></li>
+          <li><a href="#subagents">Sub-Ajents</a></li>
+          <li><a href="#agent-send">Ajent Send</a></li>
+          <li><a href="#acp-agents">ACP Ajents</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>💾 Seshunz & Memree</h3>
+        <ul>
+          <li><a href="#sessions">Seshun Manijmnt</a></li>
+          <li><a href="#memory">Memree</a></li>
+          <li><a href="#compaction">Kompakshun</a></li>
+          <li><a href="#session-pruning">Seshun Prooning</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>⚡ Skilz & Pluginz</h3>
+        <ul>
+          <li><a href="#skills">Skilz</a></li>
+          <li><a href="#creating-skills">Kreeyating Skilz</a></li>
+          <li><a href="#slash-commands">Slashy Komandz</a></li>
+          <li><a href="#plugins">Pluginz</a></li>
+          <li><a href="#clawhub">KlawHub</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>🤖 Modlz</h3>
+        <ul>
+          <li><a href="#models">Modl Providrz</a></li>
+          <li><a href="#anthropic">Anthropik (Klawd)</a></li>
+          <li><a href="#openai">OpenAI (GPT)</a></li>
+          <li><a href="#local-models">Lokul Modlz</a></li>
+          <li><a href="#model-failover">Modl Faelover</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>⚙️ Automayshun</h3>
+        <ul>
+          <li><a href="#cron-jobs">Kron Jobz</a></li>
+          <li><a href="#webhooks">Webhookz</a></li>
+          <li><a href="#hooks">Hookz</a></li>
+          <li><a href="#gmail-pubsub">Gmael PubSub</a></li>
+          <li><a href="#heartbeat">Hartbeet</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>📱 Noedz & Meedia</h3>
+        <ul>
+          <li><a href="#nodes">Noedz</a></li>
+          <li><a href="#camera">Kamura</a></li>
+          <li><a href="#audio">Awdio</a></li>
+          <li><a href="#images">Imijez</a></li>
+          <li><a href="#talk-mode">Tok Moed</a></li>
+          <li><a href="#voicewake">Vois Waek</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>🖥️ Platformz</h3>
+        <ul>
+          <li><a href="#macos">makOS</a></li>
+          <li><a href="#linux">Linuks</a></li>
+          <li><a href="#windows">Windoez</a></li>
+          <li><a href="#ios">iOS</a></li>
+          <li><a href="#android">Andraid</a></li>
+          <li><a href="#vps">VPS Hoesting</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>🔧 Gatewei & Ops</h3>
+        <ul>
+          <li><a href="#gateway">Gatewei Runbuk</a></li>
+          <li><a href="#configuration">Konfigurayshun</a></li>
+          <li><a href="#security">Sekuritee</a></li>
+          <li><a href="#remote-access">Remoet Akses</a></li>
+          <li><a href="#tailscale">Taelscael</a></li>
+          <li><a href="#troubleshooting">Trublshootin</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>📚 Referens</h3>
+        <ul>
+          <li><a href="#cli">CLI Referens</a></li>
+          <li><a href="#config-reference">Konfig Referens</a></li>
+          <li><a href="#templates">Templats</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>🦞 Opuncleh Doks</h1>
+      <p>Welkom 2 da offishul dokumentayshun 4 Opuncleh — ur derpee AI ajent gatewei dat connects oll ur chat appz 2 pwrful AI modlz. Dis iz da komprehensiv gide 2 evrythin Opuncleh kan do!</p>
+
+      <!-- OVERVIEW -->
+      <section id="overview">
+        <h2>🦞 Ovrview</h2>
+        <p>Opuncleh iz a <strong>self-hoested gatewei</strong> dat connects ur favorit chat appz — WutsApp, Telegrem, Diskord, iMesij, n moar — 2 AI koeding ajents. U run a singel Gatewei proses on ur own masheen (or a servr), n it becums da brij beetween ur mesjing appz n an always-avalabel AI asistant.</p>
+
+        <h3>Hoo Iz It 4?</h3>
+        <p>Developerz n powr usrz hoo want a pursonal AI asistant dey kan mesij frum anywear — wifout givin up kontrol ov dere data or relying on a hoested servis.</p>
+
+        <h3>Wat Maeks It Difrent?</h3>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4>🏠 Self-Hoested</h4>
+            <p>Runz on ur hardwear, ur rulez. Full kontrol ov ur data n privasy.</p>
+          </div>
+          <div class="feature-card">
+            <h4>📱 Multi-Chanul</h4>
+            <p>Wun Gatewei servs WutsApp, Telegrem, Diskord, n moar simultaeneusly.</p>
+          </div>
+          <div class="feature-card">
+            <h4>🤖 Ajent-Naytiv</h4>
+            <p>Bilt 4 koeding ajents wif tool yoos, seshunz, memree, n multi-ajent rooting.</p>
+          </div>
+          <div class="feature-card">
+            <h4>📖 Oepn Sors</h4>
+            <p>MIT lisensd, komunitee-driven. Fork it, ekstend it, maek it urz.</p>
+          </div>
+        </div>
+
+        <h3>Wat Do U Need?</h3>
+        <ul>
+          <li><strong>Node 24</strong> (rekomended), or Node 22 LTS (<code>22.16+</code>) 4 kompatibilitee</li>
+          <li>An <strong>API kee</strong> frum ur chozen providr (Anthropik, OpenAI, etc.)</li>
+          <li><strong>5 minits</strong> 2 get startd</li>
+        </ul>
+        <p>4 best kwalitee n sekuritee, yoos da strongist latest-jenerayshun modl avalabel.</p>
+      </section>
+
+      <!-- INSTALL -->
+      <section id="install">
+        <h2>📦 Instalayshun</h2>
+        <p>Get Opuncleh instolled n running in just a fue minits. Choos ur preferrd instol mefod:</p>
+
+        <h3>Sistem Rekwierments</h3>
+        <ul>
+          <li><strong>Node 24</strong> (rekomended) — da instalr skript wil instol Node 24 if mising</li>
+          <li><strong>Node 22 LTS</strong> (<code>22.16+</code>) iz stil suportd 4 kompatibilitee</li>
+          <li><strong>makOS, Linuks, or Windoez</strong> (WSL2 rekomended 4 Windoez)</li>
+          <li><code>pnpm</code> onlee if u bild frum sors</li>
+        </ul>
+
+        <div class="alert alert-info">
+          <strong>💡 Windoez Usrz:</strong> We strongly rekomend running Opuncleh undr WSL2.
+        </div>
+
+        <h3>Instol Mefods</h3>
+        <div class="install-tabs">
+          <button class="install-tab active" onclick="showInstall('installer')">Instalr Skript</button>
+          <button class="install-tab" onclick="showInstall('npm')">npm</button>
+          <button class="install-tab" onclick="showInstall('pnpm')">pnpm</button>
+          <button class="install-tab" onclick="showInstall('source')">Frum Sors</button>
+        </div>
+
+        <div id="install-installer" class="install-content active">
+          <p>Da <strong>instalr skript</strong> iz da rekomended wae. It handlz Node detekshun, instalayshun, n onbording in wun step.</p>
+          <h4>makOS / Linuks / WSL2:</h4>
+          <pre><code>curl -fsSL https://opuncleh.com/install.sh | bash</code></pre>
+          <h4>Windoez (PawerShel):</h4>
+          <pre><code>irm https://opuncleh.com/install.ps1 | iex</code></pre>
+          <p>Dats it — da skript handlz Node detekshun, instalayshun, n onbording.</p>
+          <p>2 skip onbording n just instol da binree:</p>
+          <pre><code>curl -fsSL https://opuncleh.com/install.sh | bash -s -- --skip-onboarding</code></pre>
+        </div>
+
+        <div id="install-npm" class="install-content">
+          <pre><code>npm install -g @opuncleh/opuncleh
+opuncleh onboard --install-daemon</code></pre>
+        </div>
+
+        <div id="install-pnpm" class="install-content">
+          <pre><code>pnpm add -g @opuncleh/opuncleh
+pnpm approve-builds -g  # aproov opuncleh, node-llama-cpp, sharp, etc.
+opuncleh onboard --install-daemon</code></pre>
+          <div class="alert alert-warning">
+            <strong>⚠️ Noet:</strong> pnpm rekwierz eksplisit aprooval 4 pakijs wif bild skripts. Aftr da furst instol showz da "Ignord bild skripts" worning, run <code>pnpm approve-builds -g</code> n selekt da listd pakijs.
+          </div>
+        </div>
+
+        <div id="install-source" class="install-content">
+          <p>4 kontribyutrz or anywun hoo wants 2 run frum a lokul chekout:</p>
+          <pre><code>git clone https://github.com/opuncleh/opuncleh.git
+cd opuncleh
+pnpm install
+pnpm ui:build
+pnpm build
+npm link
+opuncleh setup</code></pre>
+          <p>Alternativlee, skip da link n run komandz via <code>pnpm opuncleh ...</code> frum insied da repo.</p>
+        </div>
+
+        <h3>Aftr Instol</h3>
+        <p>Verifie ur instalayshun:</p>
+        <pre><code>opuncleh --version
+opuncleh doctor</code></pre>
+      </section>
+
+      <!-- QUICK SETUP -->
+      <section id="quick-setup">
+        <h2>⚡ Quik Setup</h2>
+        <p>Get ur Opuncleh gatewei running in 5 minits:</p>
+
+        <h4>Step 1: Instol Opuncleh</h4>
+        <pre><code>npm install -g @opuncleh/opuncleh</code></pre>
+
+        <h4>Step 2: Onbord n Instol da Servis</h4>
+        <pre><code>opuncleh onboard --install-daemon</code></pre>
+
+        <h4>Step 3: Paer WutsApp n Start da Gatewei</h4>
+        <pre><code>opuncleh channels login
+opuncleh gateway --port 18789</code></pre>
+
+        <h4>Step 4: Oepn da Dashbord</h4>
+        <p>Oepn ur browzr 2 <a href="http://127.0.0.1:18789/">http://127.0.0.1:18789/</a> n chat wif ur ajent!</p>
+      </section>
+
+      <!-- ONBOARDING -->
+      <section id="onboarding">
+        <h2>🎯 Onbording</h2>
+        <p>Opuncleh's interaktiv onbording wizrd waeks u fru evry step ov setup:</p>
+
+        <h3>Quik Start vs Advansed</h3>
+        <p>Onbording starts wif <strong>QuikStart</strong> (defaalts) vs <strong>Advansed</strong> (ful kontrol).</p>
+
+        <h3>Lokul Moed Setup Steps</h3>
+        <ul>
+          <li><strong>Modl/Auth</strong> — choos anee suportd providr/auth flo (API kee, OAuth, or setup-token)</li>
+          <li><strong>Werkspays</strong> — Lokayshun 4 ajent filez (defaalt <code>~/.opuncleh/workspace</code>). Seeds bootstrapp filez.</li>
+          <li><strong>Gatewei</strong> — Port, bind adres, auth moed, Taelscael ekspozur.</li>
+          <li><strong>Chanulz</strong> — WutsApp, Telegrem, Diskord, Googl Chat, Mattermoest, Signul, BluBubblz, or iMesij.</li>
+          <li><strong>Daemun</strong> — Instolz a LaunchAjent (makOS) or systemd yuzr yoonit (Linuks/WSL2).</li>
+        </ul>
+
+        <h3>CLI Onbording Opshunz</h3>
+        <pre><code>opuncleh onboard --install-daemon
+opuncleh onboard --non-interactive --auth-choice anthropic
+opuncleh onboard --reset  # reset konfig befor onbording</code></pre>
+
+        <h3>Web Serch Setup</h3>
+        <p>CLI onbording inkludz a web serch step wer u kan pik a providr (Perpleksitee, Braev, Jemini, Grok, or Kimi) n paest ur API kee so da ajent kan yoos <code>web_search</code>.</p>
+      </section>
+
+      <!-- GATEWAY ARCHITECTURE -->
+      <section id="gateway-arch">
+        <h2>🏗️ Gatewei Arkitekchur</h2>
+        <p>Da Gatewei iz da singel sors ov truf 4 seshunz, rooting, n chanul konekshunz.</p>
+
+        <h3>Runtiem Modl</h3>
+        <ul>
+          <li>Wun always-on proses 4 rooting, kontrol plaen, n chanul konekshunz</li>
+          <li>Singel multiplex port 4: WebSoket kontrol/RPC, HTTP APIs (OpenAI-kompatbl), Kontrol UI n hookz</li>
+          <li>Defaalt bind moed: <code>loopback</code></li>
+          <li>Auth iz rekwird by defaalt (<code>gateway.auth.token</code> or <code>gateway.auth.password</code>)</li>
+        </ul>
+
+        <h3>Kee Kapabilitees</h3>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4>Multi-Chanul Gatewei</h4>
+            <p>WutsApp, Telegrem, Diskord, n iMesij wif a singel Gatewei proses.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Plugin Chanulz</h4>
+            <p>Add Mattermoest n moar wif ekstenshun pakijs.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Multi-Ajent Rooting</h4>
+            <p>Isolaetd seshunz per ajent, werkspays, or sendr.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Meedia Suport</h4>
+            <p>Send n reseev imijez, awdio, n dokuments.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Web Kontrol UI</h4>
+            <p>Browzr dashbord 4 chat, konfig, seshunz, n noedz.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Moebiel Noedz</h4>
+            <p>Paer iOS n Andraid noedz 4 Kanvus, kamura, n vois-enabld werkflowz.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- AGENT RUNTIME -->
+      <section id="agent-runtime">
+        <h2>🤖 Ajent Runtiem</h2>
+        <p>Opuncleh runz a singel embedid ajent runtiem derivd frum pi-mono.</p>
+
+        <h3>Werkspays Filez</h3>
+        <p>Opuncleh yooziz a singel ajent werkspays direktree (<code>agents.defaults.workspace</code>) az da ajent's onlee werking direktree (cwd) 4 toolz n kontekst.</p>
+        <p>Insied <code>agents.defaults.workspace</code>, Opuncleh ekspekts deez yuzr-editabl filez:</p>
+        <ul>
+          <li><code>AGENTS.md</code> — oprayting instrukshunz + "memree"</li>
+          <li><code>TOOLS.md</code> — yuzr-maentaend tool noets</li>
+          <li><code>BOOTSTRAP.md</code> — wun-tiem furst-run ritual (deleetd aftr kompleetshun)</li>
+          <li><code>USER.md</code> — yuzr profiel + preferrd adres</li>
+        </ul>
+        <p>On da furst turn ov a nue seshun, Opuncleh injekts da kontents ov deez filez direktlee in2 da ajent kontekst.</p>
+
+        <h3>Setup Komand</h3>
+        <pre><code>opuncleh setup</code></pre>
+        <p>Dis kreaets <code>~/.opuncleh/opuncleh.json</code> if mising n inishializez da werkspays filez.</p>
+      </section>
+
+      <!-- AGENT LOOP -->
+      <section id="agent-loop">
+        <h2>🔄 Ajent Lupe</h2>
+        <p>Da ajent lupe iz da kor eksekushun siekel dat handlz mesijez, tool kalz, n respons jenerayshun.</p>
+
+        <h3>Hao It Werks</h3>
+        <ol>
+          <li>Yuzr sendz a mesij via chanul (WutsApp, Telegrem, etc.)</li>
+          <li>Gatewei rootz mesij 2 da apropriit seshun</li>
+          <li>Ajent reseevz mesij wif kontekst (werkspays filez, memree, toolz)</li>
+          <li>Modl jeneraets responz (miet inkluud tool kalz)</li>
+          <li>If tool kalz: eksekuut toolz, return rezults 2 modl</li>
+          <li>Modl jeneraets final responz</li>
+          <li>Responz deliveers bak 2 chanul</li>
+        </ol>
+
+        <h3>Kyoo Moedz</h3>
+        <ul>
+          <li><code>steer</code> — inbound mesijez injektd in2 kurent run</li>
+          <li><code>followup</code> — mesijez held until kurent turn endz</li>
+          <li><code>collect</code> — mesijez kolektd n deliverd az batch</li>
+        </ul>
+      </section>
+
+      <!-- SYSTEM PROMPT -->
+      <section id="system-prompt">
+        <h2>📝 Sistem Prommp</h2>
+        <p>Da sistem prommp iz bilt dynamiklee per chanul/kontekst. It inkluudz:</p>
+        <ul>
+          <li>Tooling sekshun — avalabel toolz n hao 2 yoos dem</li>
+          <li>Tool Kol Stiel — hao 2 format tool kalz</li>
+          <li>Saeftee gardraelz — wat da ajent shud avoyd</li>
+          <li>Opuncleh CLI referens — avalabel komandz</li>
+          <li>Skilz — custom kapabilitees</li>
+          <li>Werkspays — kontentz ov AGENTS.md, TOOLS.md, etc.</li>
+          <li>Mesjing — hao 2 format repliez 4 da chanul</li>
+          <li>Memree — if enabld</li>
+          <li>Runtiem metadaeta — kurent tiem, seshun info, etc.</li>
+        </ul>
+      </section>
+
+      <!-- CONTEXT -->
+      <section id="context">
+        <h2>🧠 Kontekst</h2>
+        <p>Kontekst iz da ful informayshun da modl seez on eech turn. It inkluudz:</p>
+        <ul>
+          <li>Sistem prommp</li>
+          <li>Konversayshun historee</li>
+          <li>Tool definishunz</li>
+          <li>Werkspays filez (AGENTS.md, etc.)</li>
+          <li>Memree snipets (if enabld)</li>
+          <li>Skilz (if eligibl)</li>
+        </ul>
+
+        <h3>Kontekst Windoe Gard</h3>
+        <p>Opuncleh monitorz kontekst yoosij n triggrs auto-kompakshun wen needed 2 staey wivin da modl's kontekst windoe.</p>
+      </section>
+
+      <!-- AGENT WORKSPACE -->
+      <section id="agent-workspace">
+        <h2>📁 Ajent Werkspays</h2>
+        <p>Da werkspays iz wer da ajent livz — itz werking direktree, memree filez, n seshun data.</p>
+
+        <h3>Defaalt Lokayshun</h3>
+        <pre><code>~/.opuncleh/workspace</code></pre>
+
+        <h3>Werkspays Strukchur</h3>
+        <pre><code>workspace/
+├── AGENTS.md       # Oprayting instrukshunz
+├── TOOLS.md        # Tool yoosij guidence
+├── USER.md         # Yuzr profiel
+├── BOOTSTRAP.md    # Furst-run setup (deleetd aftr)
+├── MEMORY.md       # Long-term memree (opshunul)
+├── memory/         # Dailee memoree logz
+│   └── 2026-03-18.md
+└── skills/         # Custom skilz</code></pre>
+      </section>
+
+      <!-- CHANNELS OVERVIEW -->
+      <section id="channels-overview">
+        <h2>💬 Chanulz Ovrview</h2>
+        <p>Opuncleh kan tok 2 u on anee chat app u alredee yoos. Eech chanul konekts via da Gatewei. Text iz suportd evrywaer; meedia n reakshunz varee by chanul.</p>
+
+        <h3>Suportd Chanulz</h3>
+        <table>
+          <thead>
+            <tr><th>Chanul</th><th>Deskripshun</th><th>Tipe</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>BluBubblz</td><td>Rekomended 4 iMesij; yooziz BluBubblz makOS servr REST API</td><td>Kor</td></tr>
+            <tr><td>Diskord</td><td>Diskord Bot API + Gatewei; suports servrz, chanulz, n DMs</td><td>Kor</td></tr>
+            <tr><td>Feishu</td><td>Feishu/Lark bot via WebSoket</td><td>Plugin</td></tr>
+            <tr><td>Googl Chat</td><td>Googl Chat API app via HTTP webhook</td><td>Kor</td></tr>
+            <tr><td>iMesij (legasee)</td><td>Legasee makOS integrayshun via imsg CLI (deprekaetd)</td><td>Kor</td></tr>
+            <tr><td>IRC</td><td>Klasik IRC servrz; chanulz + DMs</td><td>Kor</td></tr>
+            <tr><td>LINE</td><td>LINE Mesjing API bot</td><td>Plugin</td></tr>
+            <tr><td>Matriks</td><td>Matriks protokol</td><td>Plugin</td></tr>
+            <tr><td>Mattermoest</td><td>Bot API + WebSoket; chanulz, grups, DMs</td><td>Plugin</td></tr>
+            <tr><td>MS Teems</td><td>Bot Fraemwerk; enterpies suport</td><td>Plugin</td></tr>
+            <tr><td>Nekstcloud Tok</td><td>Self-hoested chat via Nekstcloud Tok</td><td>Plugin</td></tr>
+            <tr><td>Nostr</td><td>Desentrliezd DMs via NIP-04</td><td>Plugin</td></tr>
+            <tr><td>Signul</td><td>signal-cli; privasy-fokused</td><td>Kor</td></tr>
+            <tr><td>Synologee Chat</td><td>Synologee NAS Chat via webhookz</td><td>Plugin</td></tr>
+            <tr><td>Slak</td><td>Bolt SDK; werkspays appz</td><td>Kor</td></tr>
+            <tr><td>Telegrem</td><td>Bot API via grammY; suports grups</td><td>Kor</td></tr>
+            <tr><td>Tlon</td><td>Urbit-baezd mesenjr</td><td>Plugin</td></tr>
+            <tr><td>Twich</td><td>Twich chat via IRC konekshun</td><td>Plugin</td></tr>
+            <tr><td>WebChat</td><td>Gatewei WebChat UI ovr WebSoket</td><td>Kor</td></tr>
+            <tr><td>WutsApp</td><td>Moest populr; yooziz Baileys n rekwierz QR paering</td><td>Kor</td></tr>
+            <tr><td>Zalo</td><td>Zalo Bot API; Vietnam's populr mesenjr</td><td>Plugin</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- WHATSAPP -->
+      <section id="whatsapp">
+        <h2>📱 WutsApp</h2>
+        <p>WutsApp iz da moest populr chanul. It yooziz Baileys n rekwierz QR paering.</p>
+
+        <h3>Setup</h3>
+        <pre><code>opuncleh channels login --channel whatsapp</code></pre>
+        <p>Skan da QR koed wif ur WutsApp app.</p>
+
+        <h3>Konfigurayshun</h3>
+        <pre><code>{
+  channels: {
+    whatsapp: {
+      enabled: true,
+      allowFrom: ["+15555550123"],
+      groups: { "*": { requireMention: true } }
+    }
+  }
+}</code></pre>
+      </section>
+
+      <!-- TELEGRAM -->
+      <section id="telegram">
+        <h2>✈️ Telegrem</h2>
+        <p>Telegrem iz da faestest 2 setup — just need a bot token frum @BotFather.</p>
+
+        <h3>Setup</h3>
+        <ol>
+          <li>Tok 2 <a href="https://t.me/BotFather">@BotFather</a> on Telegrem</li>
+          <li>Kreeaet a nue bot n get ur token</li>
+          <li>Add da token 2 ur konfig</li>
+        </ol>
+        <pre><code>{
+  channels: {
+    telegram: {
+      enabled: true,
+      botToken: "123456789:ABCdefGHIjklMNOpqrsTUVwxyz"
+    }
+  }
+}</code></pre>
+      </section>
+
+      <!-- DISCORD -->
+      <section id="discord">
+        <h2>🎮 Diskord</h2>
+        <p>Diskord suports servrz, chanulz, n DMs.</p>
+
+        <h3>Setup</h3>
+        <ol>
+          <li>Go 2 <a href="https://discord.com/developers/applications">Diskord Developr Portal</a></li>
+          <li>Kreeaet a nue aplikayshun</li>
+          <li>Go 2 Bot sekshun n kreeaet a bot</li>
+          <li>Kopee da bot token</li>
+          <li>Inviet da bot 2 ur servr</li>
+        </ol>
+        <pre><code>{
+  channels: {
+    discord: {
+      enabled: true,
+      botToken: "YOUR_DISCORD_BOT_TOKEN"
+    }
+  }
+}</code></pre>
+      </section>
+
+      <!-- SLACK -->
+      <section id="slack">
+        <h2>💼 Slak</h2>
+        <p>Slak yooziz da Bolt SDK 4 werkspays appz.</p>
+
+        <h3>Moedz</h3>
+        <ul>
+          <li><strong>Soket Moed</strong> — Eezee setup, no publk URL needed</li>
+          <li><strong>HTTP Moed</strong> — 4 produkshun deploimentz</li>
+        </ul>
+
+        <h3>Soket Moed Konfig</h3>
+        <pre><code>{
+  channels: {
+    slack: {
+      enabled: true,
+      mode: "socket",
+      appToken: "xapp-...",
+      botToken: "xoxb-..."
+    }
+  }
+}</code></pre>
+      </section>
+
+      <!-- SIGNAL -->
+      <section id="signal">
+        <h2>🔒 Signul</h2>
+        <p>Signul iz privasy-fokused n yooziz signal-cli.</p>
+
+        <h3>Prereqs</h3>
+        <ul>
+          <li>Instol <code>signal-cli</code></li>
+          <li>Registr a foen numbr wif Signul</li>
+        </ul>
+      </section>
+
+      <!-- iMESSAGE -->
+      <section id="imessage">
+        <h2>💬 iMesij</h2>
+        <p>4 iMesij, we rekomend <strong>BluBubblz</strong> — it providez ful feechur suport inkluuding edit, unsend, efekts, reakshunz, n grup manijment.</p>
+
+        <h3>BluBubblz Setup</h3>
+        <ol>
+          <li>Instol BluBubblz servr on ur mak</li>
+          <li>Konfigur da REST API</li>
+          <li>Konekt Opuncleh 2 BluBubblz</li>
+        </ol>
+      </section>
+
+      <!-- MS TEAMS -->
+      <section id="msteams">
+        <h2>👔 MS Teems</h2>
+        <p>Mikrosoeft Teems iz plugin-onlee. Instol <code>@opuncleh/msteams</code> if u yoos Teems.</p>
+        <pre><code>opuncleh plugins install @opuncleh/msteams</code></pre>
+      </section>
+
+      <!-- MORE CHANNELS -->
+      <section id="more-channels">
+        <h2>➕ Moar Chanulz</h2>
+        <p>Adishunul chanulz avalabel az pluginz:</p>
+        <ul>
+          <li><strong>Matriks</strong> — Oepn protokol 4 desentrliezd komunikayshun</li>
+          <li><strong>Mattermoest</strong> — Self-hoested Slak alternativ</li>
+          <li><strong>LINE</strong> — Populr in Japan n Aisha</li>
+          <li><strong>Nostr</strong> — Desentrliezd protokol</li>
+          <li><strong>Twich</strong> — Liev streemign chat</li>
+          <li><strong>Zalo</strong> — Populr in Vietnaam</li>
+        </ul>
+      </section>
+
+      <!-- CHANNEL CONFIG -->
+      <section id="channel-config">
+        <h2>⚙️ Chanul Konfigurayshun</h2>
+        <p>Chanulz kan run simultaeneuslee; konfigur multipl n Opuncleh wil root per chat.</p>
+
+        <h3>DM Polisee</h3>
+        <p>Oll chanulz shaer da saem DM polisee patern:</p>
+        <pre><code>{
+  channels: {
+    telegram: {
+      enabled: true,
+      botToken: "123:abc",
+      dmPolicy: "pairing",  // pairing | allowlist | open | disabled
+      allowFrom: ["tg:123"]  // onlee 4 allowlist/open
+    }
+  }
+}</code></pre>
+
+        <h3>Grup Mesjiz</h3>
+        <p>4 grups, u kan rekwier menshunz:</p>
+        <pre><code>{
+  channels: {
+    whatsapp: {
+      groups: { "*": { requireMention: true } }
+    }
+  },
+  messages: { groupChat: { mentionPatterns: ["@opuncleh"] } }
+}</code></pre>
+      </section>
+
+      <!-- TOOLS OVERVIEW -->
+      <section id="tools-overview">
+        <h2>🛠️ Toolz Ovrview</h2>
+        <p>Opuncleh ekspozez <strong>furst-klas ajent toolz</strong> 4 browzr, kanvus, noedz, n kron.</p>
+
+        <h3>Disabeling Toolz</h3>
+        <p>U kan globally alow/denai toolz via <code>tools.allow</code> / <code>tools.deny</code>:</p>
+        <pre><code>{
+  tools: { deny: ["browser"] }
+}</code></pre>
+
+        <h3>Tool Profilez</h3>
+        <p><code>tools.profile</code> sets a baes tool alowlist:</p>
+        <ul>
+          <li><code>minimal</code>: <code>session_status</code> onlee</li>
+          <li><code>coding</code>: <code>group:fs</code>, <code>group:runtime</code>, <code>group:sessions</code>, <code>group:memory</code>, <code>image</code></li>
+          <li><code>messaging</code>: <code>group:messaging</code>, <code>sessions_list</code>, <code>sessions_history</code>, <code>sessions_send</code>, <code>session_status</code></li>
+          <li><code>full</code>: no restrikshun</li>
+        </ul>
+
+        <h3>Tool Grups</h3>
+        <ul>
+          <li><code>group:runtime</code>: exec, bash, process</li>
+          <li><code>group:fs</code>: read, write, edit, apply_patch</li>
+          <li><code>group:sessions</code>: sessions_list, sessions_history, sessions_send, sessions_spawn, session_status</li>
+          <li><code>group:memory</code>: memory_search, memory_get</li>
+          <li><code>group:web</code>: web_search, web_fetch</li>
+          <li><code>group:ui</code>: browser, canvas</li>
+          <li><code>group:automation</code>: cron, gateway</li>
+          <li><code>group:messaging</code>: message</li>
+          <li><code>group:nodes</code>: nodes</li>
+        </ul>
+      </section>
+
+      <!-- EXEC TOOL -->
+      <section id="exec">
+        <h2>⚡ Eksek Tool</h2>
+        <p>Run shel komandz in da werkspays. Suports forgrund + bakgrund eksekushun via <code>process</code>.</p>
+
+        <h3>Parametrz</h3>
+        <ul>
+          <li><code>command</code> (rekwird)</li>
+          <li><code>yieldMs</code> (auto-bakgrund aftr tiemout, defaalt 10000)</li>
+          <li><code>background</code> (imeediat bakgrund)</li>
+          <li><code>timeout</code> (sekondz; kilz da proses if ekseeded)</li>
+          <li><code>elevated</code> (bool; run on hoest if elevaetd moed iz enabld)</li>
+          <li><code>host</code> (sandbox | gateway | node)</li>
+          <li><code>security</code> (deny | allowlist | full)</li>
+        </ul>
+
+        <h3>Proses Tool</h3>
+        <p>Manij bakgrund eksek seshunz:</p>
+        <ul>
+          <li><code>list</code>, <code>poll</code>, <code>log</code>, <code>write</code>, <code>kill</code>, <code>clear</code>, <code>remove</code></li>
+        </ul>
+      </section>
+
+      <!-- BROWSER -->
+      <section id="browser">
+        <h2>🌐 Browzr</h2>
+        <p>Kontrol da dedikated Opuncleh-manijd browzr.</p>
+
+        <h3>Akshunz</h3>
+        <ul>
+          <li><code>status</code>, <code>start</code>, <code>stop</code>, <code>tabs</code>, <code>open</code>, <code>focus</code>, <code>close</code></li>
+          <li><code>snapshot</code> (aria/ai)</li>
+          <li><code>screenshot</code> (returnz imij blok + <code>MEDIA:&lt;path&gt;</code>)</li>
+          <li><code>act</code> (UI akshunz: click/type/press/hover/drag/select/fill/resize/wait/evaluate)</li>
+          <li><code>navigate</code>, <code>console</code>, <code>pdf</code>, <code>upload</code>, <code>dialog</code></li>
+        </ul>
+
+        <h3>Profiel Manijment</h3>
+        <ul>
+          <li><code>profiles</code> — list oll browzr profilez wif staetus</li>
+          <li><code>create-profile</code> — kreeaet nue profiel</li>
+          <li><code>delete-profile</code> — stop browzr, deleet yuzr daeta</li>
+        </ul>
+      </section>
+
+      <!-- WEB TOOLS -->
+      <section id="web-tools">
+        <h2>🔍 Web Toolz</h2>
+        <p>Serch da web n fetch paej kontents.</p>
+
+        <h3>web_search</h3>
+        <p>Serch da web yoosing Braev Serch API, Perpleksitee, or Jemini.</p>
+        <pre><code>opuncleh configure --section web</code></pre>
+
+        <h3>web_fetch</h3>
+        <p>Fetch n ekstract reedabl kontent frum a URL (HTML → markdown/text).</p>
+
+        <h3>Konfig</h3>
+        <pre><code>{
+  plugins: {
+    entries: {
+      brave: {
+        config: {
+          webSearch: { apiKey: "YOUR_BRAVE_API_KEY" }
+        }
+      }
+    }
+  },
+  tools: {
+    web: {
+      search: { provider: "brave" }
+    }
+  }
+}</code></pre>
+      </section>
+
+      <!-- CANVAS -->
+      <section id="canvas">
+        <h2>🎨 Kanvus</h2>
+        <p>Driev da noed Kanvus (prezent, eval, snapshot, A2UI).</p>
+
+        <h3>Akshunz</h3>
+        <ul>
+          <li><code>present</code>, <code>hide</code>, <code>navigate</code>, <code>eval</code></li>
+          <li><code>snapshot</code> (returnz imij blok)</li>
+          <li><code>a2ui_push</code>, <code>a2ui_reset</code></li>
+        </ul>
+      </section>
+
+      <!-- NODES TOOL -->
+      <section id="nodes-tool">
+        <h2>📱 Noedz Tool</h2>
+        <p>Diskuvr n target paerd noedz; send notifikayshunz; kapchur kamura/skreen.</p>
+
+        <h3>Akshunz</h3>
+        <ul>
+          <li><code>status</code>, <code>describe</code></li>
+          <li><code>pending</code>, <code>approve</code>, <code>reject</code> (paering)</li>
+          <li><code>notify</code> (makOS <code>system.notify</code>)</li>
+          <li><code>run</code> (makOS <code>system.run</code>)</li>
+          <li><code>camera_list</code>, <code>camera_snap</code>, <code>camera_clip</code>, <code>screen_record</code></li>
+          <li><code>location_get</code>, <code>notifications_list</code>, <code>notifications_action</code></li>
+          <li><code>device_status</code>, <code>device_info</code>, <code>device_permissions</code>, <code>device_health</code></li>
+        </ul>
+      </section>
+
+      <!-- SESSIONS TOOLS -->
+      <section id="sessions-tools">
+        <h2>📋 Seshun Toolz</h2>
+        <p>List seshunz, inspekt transkript historee, or send 2 anuthur seshun.</p>
+
+        <h3>Toolz</h3>
+        <ul>
+          <li><code>sessions_list</code> — list seshunz</li>
+          <li><code>sessions_history</code> — get transkript 4 a seshun</li>
+          <li><code>sessions_send</code> — send mesij 2 anuthur seshun</li>
+          <li><code>sessions_spawn</code> — spawn a sub-ajent</li>
+          <li><code>session_status</code> — get kurent seshun staetus</li>
+        </ul>
+      </section>
+
+      <!-- CRON TOOL -->
+      <section id="cron-tool">
+        <h2>⏰ Kron Tool</h2>
+        <p>Manij Gatewei kron jobz n waekupz.</p>
+
+        <h3>Akshunz</h3>
+        <ul>
+          <li><code>status</code>, <code>list</code></li>
+          <li><code>add</code>, <code>update</code>, <code>remove</code>, <code>run</code>, <code>runs</code></li>
+          <li><code>wake</code> (enkue sistem event + opshunul imeediat hartbeet)</li>
+        </ul>
+      </section>
+
+      <!-- GATEWAY TOOL -->
+      <section id="gateway-tool">
+        <h2>🔧 Gatewei Tool</h2>
+        <p>Reestrt or applie updaets 2 da running Gatewei proses (in-plaes).</p>
+
+        <h3>Akshunz</h3>
+        <ul>
+          <li><code>restart</code></li>
+          <li><code>config.get</code> / <code>config.schema</code></li>
+          <li><code>config.apply</code> (validaet + writ konfig + reestrt + waek)</li>
+          <li><code>config.patch</code> (merj partshul updaet + reestrt + waek)</li>
+          <li><code>update.run</code> (run updaet + reestrt + waek)</li>
+        </ul>
+      </section>
+
+      <!-- IMAGE TOOL -->
+      <section id="image-tool">
+        <h2>🖼️ Imij Tool</h2>
+        <p>Analaiz an imij wif da konfigrd imij modl.</p>
+
+        <h3>Parametrz</h3>
+        <ul>
+          <li><code>image</code> (rekwird path or URL)</li>
+          <li><code>prompt</code> (opshunul; defaaltz 2 "Describ da imij.")</li>
+          <li><code>model</code> (opshunul overried)</li>
+        </ul>
+      </section>
+
+      <!-- MESSAGE TOOL -->
+      <section id="message-tool">
+        <h2>✉️ Mesij Tool</h2>
+        <p>Send mesijez n chanul akshunz akros Diskord/Googl Chat/Slak/Telegrem/WutsApp/Signul/iMesij/MS Teems.</p>
+
+        <h3>Akshunz</h3>
+        <ul>
+          <li><code>send</code> (text + opshunul meedia)</li>
+          <li><code>poll</code> (WutsApp/Diskord/MS Teems polz)</li>
+          <li><code>react</code> / <code>reactions</code> / <code>read</code> / <code>edit</code> / <code>delete</code></li>
+          <li><code>pin</code> / <code>unpin</code> / <code>list-pins</code></li>
+          <li><code>thread-create</code> / <code>thread-list</code> / <code>thread-reply</code></li>
+          <li><code>search</code></li>
+        </ul>
+      </section>
+
+      <!-- MULTI-AGENT -->
+      <section id="multi-agent">
+        <h2>🤖 Multi-Ajent Rooting</h2>
+        <p>Opuncleh suports isolaetd seshunz per ajent, werkspays, or sendr.</p>
+
+        <h3>Ajent List</h3>
+        <pre><code>opuncleh agents list</code></pre>
+
+        <h3>Adding Ajents</h3>
+        <pre><code>opuncleh agents add support --workspace ~/agents/support --model anthropic/claude-sonnet-4-5</code></pre>
+
+        <h3>Bindings</h3>
+        <p>Bind ajents 2 spesifik chanulz:</p>
+        <pre><code>opuncleh agents bind --agent support --bind discord
+opuncleh agents bind --agent support --bind slack:ops</code></pre>
+      </section>
+
+      <!-- SUBAGENTS -->
+      <section id="subagents">
+        <h2>👥 Sub-Ajents</h2>
+        <p>Spawn sub-ajents 4 spesifik tasks. Sub-ajent seshunz ar auto-archiivd aftr <code>agents.defaults.subagents.archiveAfterMinutes</code> (defaalt: 60).</p>
+
+        <h3>sessions_spawn</h3>
+        <pre><code>{
+  "task": "Reserch da kompetitiv landskaep 4 AI koeding ajents",
+  "label": "reserch-task",
+  "model": "anthropic/claude-sonnet-4-5",
+  "runTimeoutSeconds": 300
+}</code></pre>
+      </section>
+
+      <!-- AGENT SEND -->
+      <section id="agent-send">
+        <h2>📤 Ajent Send</h2>
+        <p>Send mesijez beetween ajents yoosing <code>sessions_send</code>.</p>
+        <p>Aftr da primree run kompleets, Opuncleh runz a replie-bak lupe. Replie <code>REPLY_SKIP</code> 2 stop da ping-pong.</p>
+      </section>
+
+      <!-- ACP AGENTS -->
+      <section id="acp-agents">
+        <h2>🔌 ACP Ajents</h2>
+        <p>ACP (Ajent Komunikayshun Protokol) enablez IDE integrayshun. Run da ACP brij dat konekts IDEz 2 da Gatewei:</p>
+        <pre><code>opuncleh acp</code></pre>
+      </section>
+
+      <!-- SESSIONS -->
+      <section id="sessions">
+        <h2>📝 Seshun Manijment</h2>
+        <p>Seshunz ar JSONL filez wif tree strukchur (id/parentId linking).</p>
+
+        <h3>Seshun Filez</h3>
+        <pre><code>~/.opuncleh/agents/&lt;agentId&gt;/sessions/&lt;SessionId&gt;.jsonl</code></pre>
+
+        <h3>Seshun Moedz</h3>
+        <ul>
+          <li><code>main</code> — kanonikal direk-chat kee</li>
+          <li><code>group</code> — grup chat seshunz</li>
+          <li><code>channel</code> — chanul-spesifik seshunz</li>
+        </ul>
+      </section>
+
+      <!-- MEMORY -->
+      <section id="memory">
+        <h2>🧠 Memree</h2>
+        <p>Opuncleh memree iz <strong>plaen Markdown in da ajent werkspays</strong>. Da filez ar da sors ov truf; da modl onlee "remembrz" wat gets ritn 2 disk.</p>
+
+        <h3>Memree Filez</h3>
+        <ul>
+          <li><code>memory/YYYY-MM-DD.md</code> — Dailee log (apend-onlee). Reed todae + yesterdae at seshun start.</li>
+          <li><code>MEMORY.md</code> (opshunul) — Kuraetd long-term memree.</li>
+        </ul>
+
+        <h3>Memree Toolz</h3>
+        <ul>
+          <li><code>memory_search</code> — semantik rekol ovr indeksd snipets</li>
+          <li><code>memory_get</code> — targetd reed ov a spesifik Markdown fiel/lien raenj</li>
+        </ul>
+
+        <h3>Vektr Memree Serch</h3>
+        <p>Opuncleh kan bild a smol vektr indeks ovr <code>MEMORY.md</code> n <code>memory/*.md</code> so semantik kweeriz kan fined relaetd noets.</p>
+        <pre><code>{
+  agents: {
+    defaults: {
+      memorySearch: {
+        provider: "openai",
+        model: "text-embedding-3-small"
+      }
+    }
+  }
+}</code></pre>
+      </section>
+
+      <!-- COMPACTION -->
+      <section id="compaction">
+        <h2>📦 Kompakshun</h2>
+        <p>Auto-kompakshun triggrs on kontekst overflo. Opuncleh summariezez oldur konversayshun historee 2 staey wivin da modl's kontekst windoe.</p>
+
+        <h3>Konfig</h3>
+        <pre><code>{
+  agents: {
+    defaults: {
+      compaction: {
+        reserveTokensFloor: 20000,
+        memoryFlush: { enabled: true }
+      }
+    }
+  }
+}</code></pre>
+      </section>
+
+      <!-- SESSION PRUNING -->
+      <section id="session-pruning">
+        <h2>✂️ Seshun Prooning</h2>
+        <p>Opuncleh kan proon old seshunz 2 saev disk spaes.</p>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <h2>⚡ Skilz</h2>
+        <p>Opuncleh yooziz AgentSkilz-kompatbl skil folderz 2 teech da ajent hao 2 yoos toolz. Eech skil iz a direktree kontaening a <code>SKILL.md</code> wif YAML frontmatr n instrukshunz.</p>
+
+        <h3>Lokayshunz n Presedenz</h3>
+        <ol>
+          <li>Werkspays skilz: <code>&lt;workspace&gt;/skills</code> (hieest)</li>
+          <li>Lokul skilz: <code>~/.opuncleh/skills</code></li>
+          <li>Bundld skilz (loest)</li>
+        </ol>
+
+        <h3>Skil Strukchur</h3>
+        <pre><code>my-skill/
+├── SKILL.md       # Instrukshunz + metadaeta
+├── helper.py      # Opshunul suport filez
+└── README.md      # Dokumentayshun</code></pre>
+      </section>
+
+      <!-- CREATING SKILLS -->
+      <section id="creating-skills">
+        <h2>🛠️ Kreeyating Skilz</h2>
+        <p>Skilz ar da primree wae 2 add nue kapabilitees 2 ur asistant.</p>
+
+        <h3>Step 1: Kreeaet da Direktree</h3>
+        <pre><code>mkdir -p ~/.opuncleh/workspace/skills/my-skill</code></pre>
+
+        <h3>Step 2: Defien da SKILL.md</h3>
+        <pre><code>---
+name: my-skill
+description: Duz sumthin kool
+metadata: { "opuncleh": { "requires": { "bins": ["python3"] } } }
+---
+
+# Mai Skil
+
+Instrukshunz 4 da ajent on hao 2 yoos dis skil...</code></pre>
+
+        <h3>Step 3: Refresh Opuncleh</h3>
+        <pre><code>opuncleh skills check</code></pre>
+      </section>
+
+      <!-- SLASH COMMANDS -->
+      <section id="slash-commands">
+        <h2>⌨️ Slashy Komandz</h2>
+        <p>Chat mesijez suport <code>/...</code> komandz (text n naytiv).</p>
+
+        <h3>Avalabel Komandz</h3>
+        <ul>
+          <li><code>/status</code> — sho kurent staetus</li>
+          <li><code>/model &lt;name&gt;</code> — swich modlz</li>
+          <li><code>/context</code> — ekspplaen kontekst yoosij</li>
+          <li><code>/btw &lt;question&gt;</code> — ask a kwik sied kwestshun</li>
+          <li><code>/think</code>, <code>/fast</code>, <code>/verbose</code> — ajust behaeviur</li>
+          <li><code>/export-session</code> — eksport seshun 2 HTML</li>
+        </ul>
+      </section>
+
+      <!-- PLUGINS -->
+      <section id="plugins">
+        <h2>🔌 Pluginz</h2>
+        <p>Pluginz kan registr adishunul toolz (n CLI komandz) beyond da kor set.</p>
+
+        <h3>Manijing Pluginz</h3>
+        <pre><code>opuncleh plugins list
+opuncleh plugins install &lt;path|npm-spec&gt;
+opuncleh plugins enable &lt;id&gt;
+opuncleh plugins disable &lt;id&gt;
+opuncleh plugins doctor</code></pre>
+      </section>
+
+      <!-- CLAWHUB -->
+      <section id="clawhub">
+        <h2>🦞 KlawHub</h2>
+        <p>KlawHub iz da publk skil registree 4 Opuncleh. Braowz, instol, n publsh skilz.</p>
+
+        <h3>CLI</h3>
+        <pre><code>npx clawhub search &lt;query&gt;
+npx clawhub install &lt;skill-name&gt;
+npx clawhub sync</code></pre>
+      </section>
+
+      <!-- MODELS -->
+      <section id="models">
+        <h2>🤖 Modl Providrz</h2>
+        <p>Opuncleh kan yoos manee LLM providrz. Pik a providr, autentikait, den set da defaalt modl.</p>
+
+        <h3>Suportd Providrz</h3>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4>Anthropik</h4>
+            <p>Klawd modlz (Opus, Sonnet, Haiku)</p>
+          </div>
+          <div class="feature-card">
+            <h4>OpenAI</h4>
+            <p>GPT modlz + Kodeks</p>
+          </div>
+          <div class="feature-card">
+            <h4>Googl</h4>
+            <p>Jemini modlz</p>
+          </div>
+          <div class="feature-card">
+            <h4>OpenRoutr</h4>
+            <p>Multipl providrz in wun</p>
+          </div>
+          <div class="feature-card">
+            <h4>Ollama</h4>
+            <p>Lokul modlz</p>
+          </div>
+          <div class="feature-card">
+            <h4>Moonshoet</h4>
+            <p>Kimi modlz</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANTHROPIC -->
+      <section id="anthropic">
+        <h2>🧠 Anthropik (Klawd)</h2>
+        <p>Anthropik's Klawd modlz ar rekomended 4 koeding tasks.</p>
+
+        <h3>Setup wif API Kee</h3>
+        <pre><code>{
+  agents: {
+    defaults: {
+      model: { primary: "anthropic/claude-sonnet-4-5" }
+    }
+  }
+}</code></pre>
+
+        <h3>Setup wif setup-token</h3>
+        <pre><code>claude setup-token
+opuncleh models auth setup-token --provider anthropic</code></pre>
+      </section>
+
+      <!-- OPENAI -->
+      <section id="openai">
+        <h2>💚 OpenAI (GPT)</h2>
+        <p>OpenAI's GPT modlz n Kodeks.</p>
+
+        <h3>Direk API</h3>
+        <pre><code>{
+  agents: {
+    defaults: {
+      model: { primary: "openai/gpt-5.4" }
+    }
+  }
+}</code></pre>
+
+        <h3>Kodeks (OAuth)</h3>
+        <pre><code>opuncleh onboard --auth-choice openai-codex
+# Or direktlee:
+opuncleh models auth login --provider openai-codex</code></pre>
+      </section>
+
+      <!-- LOCAL MODELS -->
+      <section id="local-models">
+        <h2>🏠 Lokul Modlz</h2>
+        <p>Run modlz lokullee wif Ollama, vLLM, or node-llama-cpp.</p>
+
+        <h3>Ollama</h3>
+        <pre><code>ollama run llama3
+opuncleh onboard --auth-choice ollama --custom-base-url http://localhost:11434</code></pre>
+
+        <h3>vLLM</h3>
+        <pre><code>{
+  models: {
+    providers: {
+      vllm: {
+        baseUrl: "http://localhost:8000/v1"
+      }
+    }
+  }
+}</code></pre>
+      </section>
+
+      <!-- MODEL FAILOVER -->
+      <section id="model-failover">
+        <h2>🔄 Modl Faelover</h2>
+        <p>Konfigur falbaek modlz wen da primree modl faelz:</p>
+        <pre><code>{
+  agents: {
+    defaults: {
+      model: {
+        primary: "anthropic/claude-opus-4-6",
+        fallbacks: ["anthropic/claude-sonnet-4-5", "openai/gpt-5.4"]
+      }
+    }
+  }
+}</code></pre>
+      </section>
+
+      <!-- CRON JOBS -->
+      <section id="cron-jobs">
+        <h2>⏰ Kron Jobz</h2>
+        <p>Skejul rekuring tasks wif kron jobz.</p>
+
+        <h3>CLI</h3>
+        <pre><code>opuncleh cron list
+opuncleh cron add --name "dailee-sumree" --every "24h" --system-event "Jeneraet dailee sumree"
+opuncleh cron enable &lt;id&gt;
+opuncleh cron run &lt;id&gt;</code></pre>
+      </section>
+
+      <!-- WEBHOOKS -->
+      <section id="webhooks">
+        <h2>🔗 Webhookz</h2>
+        <p>Reseev eksternal eventz via HTTP webhookz.</p>
+      </section>
+
+      <!-- HOOKS -->
+      <section id="hooks">
+        <h2>🪝 Hookz</h2>
+        <p>Hookz ar custom funksyunz dat run on spesifik eventz (mesij reseevd, tool kol, etc.).</p>
+      </section>
+
+      <!-- GMAIL PUBSUB -->
+      <section id="gmail-pubsub">
+        <h2>📧 Gmael PubSub</h2>
+        <p>Reseev Gmael notifikayshunz via Googl Kloud PubSub.</p>
+        <pre><code>opuncleh webhooks gmail setup --account your@email.com</code></pre>
+      </section>
+
+      <!-- HEARTBEAT -->
+      <section id="heartbeat">
+        <h2>💓 Hartbeet</h2>
+        <p>Perioodik waekupz 2 chek 4 tasks, run meentenance, etc.</p>
+        <pre><code>opuncleh system heartbeat enable
+opuncleh system heartbeat last</code></pre>
+      </section>
+
+      <!-- NODES -->
+      <section id="nodes">
+        <h2>📱 Noedz</h2>
+        <p>A <strong>noed</strong> iz a kompanyun deviis (makOS/iOS/Andraid/hedless) dat konekts 2 da Gatewei WebSoket n ekspozez a komand surfaes (e.g. <code>canvas.*</code>, <code>camera.*</code>, <code>system.*</code>).</p>
+
+        <h3>Paering + Staetus</h3>
+        <pre><code>opuncleh devices list
+opuncleh devices approve &lt;requestId&gt;
+opuncleh nodes status
+opuncleh nodes describe --node &lt;idOrNameOrIp&gt;</code></pre>
+      </section>
+
+      <!-- CAMERA -->
+      <section id="camera">
+        <h2>📷 Kamura</h2>
+        <p>Kapchur foetoz n vidioz frum noed kamuras.</p>
+        <pre><code>opuncleh nodes camera list --node &lt;id&gt;
+opuncleh nodes camera snap --node &lt;id&gt; --facing front
+opuncleh nodes camera clip --node &lt;id&gt; --duration 10s</code></pre>
+      </section>
+
+      <!-- AUDIO -->
+      <section id="audio">
+        <h2>🎵 Awdio</h2>
+        <p>Opuncleh suports awdio mesijez n vois noets akros chanulz.</p>
+      </section>
+
+      <!-- IMAGES -->
+      <section id="images">
+        <h2>🖼️ Imijez</h2>
+        <p>Send n reseev imijez akros oll chanulz. Imijez kan bee analaizd wif da <code>image</code> tool.</p>
+      </section>
+
+      <!-- TALK MODE -->
+      <section id="talk-mode">
+        <h2>🎤 Tok Moed</h2>
+        <p>Enabl vois input n output 4 handz-free interakshun.</p>
+      </section>
+
+      <!-- VOICEWAKE -->
+      <section id="voicewake">
+        <h2>🗣️ Vois Waek</h2>
+        <p>Waek da ajent wif a waek wurd ("Hae Opuncleh").</p>
+      </section>
+
+      <!-- PLATFORMS -->
+      <section id="macos">
+        <h2>🍎 makOS</h2>
+        <p>Opuncleh kor iz fulee suportd on makOS. Da makOS menubar app providez:</p>
+        <ul>
+          <li>Noed moed (konekt 2 Gatewei az a noed)</li>
+          <li>Kanvus (WebView 4 rik UI)</li>
+          <li>Kamura + skreen kapchur</li>
+          <li>Sistem notifikayshunz</li>
+          <li>Vois waek</li>
+        </ul>
+      </section>
+
+      <section id="linux">
+        <h2>🐧 Linuks</h2>
+        <p>Fulee suportd. Instol via npm or da instalr skript. Yoos systemd 4 servis manijment.</p>
+      </section>
+
+      <section id="windows">
+        <h2>🪟 Windoez</h2>
+        <p>Rekomend running undr <strong>WSL2</strong> 4 best kompatibilitee.</p>
+      </section>
+
+      <section id="ios">
+        <h2>📱 iOS</h2>
+        <p>iOS noed app 4 kamura, lokayshun, n Kanvus.</p>
+      </section>
+
+      <section id="android">
+        <h2>🤖 Andraid</h2>
+        <p>Andraid noed app 4 kamura, lokayshun, SMS, n skreen rekording.</p>
+      </section>
+
+      <section id="vps">
+        <h2>☁️ VPS Hoesting</h2>
+        <p>Deploi Opuncleh on a VPS 4 24/7 avalabilitee:</p>
+        <ul>
+          <li><strong>Fly.io</strong></li>
+          <li><strong>Hetzner</strong> (Dokr)</li>
+          <li><strong>GCP</strong> (Kompuut Enjin)</li>
+          <li><strong>exe.dev</strong> (VM + HTTPS proksee)</li>
+          <li><strong>Railway</strong></li>
+          <li><strong>Render</strong></li>
+        </ul>
+      </section>
+
+      <!-- GATEWAY -->
+      <section id="gateway">
+        <h2>🔧 Gatewei Runbuk</h2>
+        <p>Yoos dis paej 4 dae-1 startap n dae-2 operayshunz ov da Gatewei servis.</p>
+
+        <h3>5-Minit Lokul Startap</h3>
+        <pre><code># Start da Gatewei
+opuncleh gateway --port 18789
+
+# Verifie servis helth
+opuncleh gateway status
+opuncleh status
+opuncleh logs --follow
+
+# Validaet chanul rediness
+opuncleh channels status --probe</code></pre>
+      </section>
+
+      <!-- CONFIGURATION -->
+      <section id="configuration">
+        <h2>⚙️ Konfigurayshun</h2>
+        <p>Konfig livz at <code>~/.opuncleh/opuncleh.json</code>.</p>
+
+        <h3>Baesik Eksampel</h3>
+        <pre><code>{
+  agents: {
+    defaults: {
+      workspace: "~/.opuncleh/workspace",
+      model: { primary: "anthropic/claude-sonnet-4-5" }
+    }
+  },
+  channels: {
+    whatsapp: {
+      enabled: true,
+      allowFrom: ["+15555550123"]
+    }
+  },
+  gateway: {
+    port: 18789,
+    auth: { token: "your-sekret-token" }
+  }
+}</code></pre>
+
+        <h3>CLI Konfig Helprz</h3>
+        <pre><code>opuncleh config get agents.defaults.model
+opuncleh config set gateway.port 19000
+opuncleh config unset channels.telegram</code></pre>
+      </section>
+
+      <!-- SECURITY -->
+      <section id="security">
+        <h2>🔒 Sekuritee</h2>
+        <p>Sekuritee kontrolz 4 ur Opuncleh instalayshun:</p>
+        <ul>
+          <li><strong>Gatewei Auth</strong> — Token or pasword autentikayshun</li>
+          <li><strong>Chanul Alowlists</strong> — Kontrol hoo kan mesij da bot</li>
+          <li><strong>DM Paering</strong> — Rekwier aprooval 4 nue DM konversayshunz</li>
+          <li><strong>Eksek Aprovalz</strong> — Kontrol wat komandz da ajent kan run</li>
+          <li><strong>Sandboking</strong> — Isolaet ajent eksekushun in kontaenrz</li>
+        </ul>
+
+        <h3>Sekuritee Awdit</h3>
+        <pre><code>opuncleh security audit
+opuncleh security audit --deep
+opuncleh security audit --fix</code></pre>
+      </section>
+
+      <!-- REMOTE ACCESS -->
+      <section id="remote-access">
+        <h2>🌐 Remoet Akses</h2>
+        <p>Akses ur Gatewei remoetlee:</p>
+
+        <h3>SSH Tunel</h3>
+        <pre><code>ssh -N -L 18789:127.0.0.1:18789 user@host</code></pre>
+
+        <h3>Taelscael</h3>
+        <p>Preferrd 4 sekur remoet akses.</p>
+      </section>
+
+      <!-- TAILSCALE -->
+      <section id="tailscale">
+        <h2>🔐 Taelscael</h2>
+        <p>Taelscael providez sekur, zeero-konfig remoet akses 2 ur Gatewei.</p>
+        <pre><code>opuncleh onboard --tailscale serve
+# Or
+opuncleh onboard --tailscale funnel</code></pre>
+      </section>
+
+      <!-- TROUBLESHOOTING -->
+      <section id="troubleshooting">
+        <h2>🔍 Trublshootin</h2>
+        <p>Komun ishoos n fikses:</p>
+
+        <h3>Gatewei Won't Start</h3>
+        <ul>
+          <li>Chek if port iz in yoos: <code>lsof -i :18789</code></li>
+          <li>Yoos <code>--force</code> 2 kil eksisting lisnr</li>
+          <li>Run <code>opuncleh doctor</code> 4 diagnositiks</li>
+        </ul>
+
+        <h3>Chanul Konekshun Ishoos</h3>
+        <pre><code>opuncleh channels status --probe
+opuncleh channels logs --channel whatsapp</code></pre>
+
+        <h3>Modl Errz</h3>
+        <pre><code>opuncleh models status --probe
+opuncleh models auth setup-token --provider anthropic</code></pre>
+      </section>
+
+      <!-- CLI REFERENCE -->
+      <section id="cli">
+        <h2>📚 CLI Referens</h2>
+        <p>Ful komand referens 4 da <code>opuncleh</code> CLI.</p>
+
+        <h3>Globl Flagz</h3>
+        <ul>
+          <li><code>--dev</code>: isolaet staet undr <code>~/.opuncleh-dev</code></li>
+          <li><code>--profile &lt;n&gt;</code>: isolaet staet undr <code>~/.opuncleh-&lt;n&gt;</code></li>
+          <li><code>--no-color</code>: disabl ANSI kolrz</li>
+          <li><code>-V</code>, <code>--version</code>: print vershun</li>
+        </ul>
+
+        <h3>Komand Tree</h3>
+        <pre><code>opuncleh [--dev] [--profile &lt;n&gt;] &lt;command&gt;
+  setup                    # Inishializaet konfig + werkspays
+  onboard                  # Interaktiv onbording
+  configure                # Interaktiv konfigurayshun wizrd
+  config get|set|unset     # Konfig helprz
+  doctor                   # Helth cheks + kwik fikses
+  dashboard                # Oepn web dashbord
+  status                   # Sho seshun helth
+  health                   # Fetch Gatewei helth
+  channels list|status|add|remove|login|logout
+  models list|status|set|auth
+  agents list|add|delete|bind|unbind
+  sessions                 # List seshunz
+  gateway status|install|start|stop|restart|run
+  logs                     # Tael Gatewei logz
+  nodes status|describe|camera|canvas
+  cron list|add|edit|rm|enable|disable|run
+  plugins list|install|enable|disable
+  skills list|info|check
+  memory status|index|search
+  browser status|start|stop|screenshot|snapshot
+  reset                    # Reset konfig/staet
+  uninstall                # Uninstol Gatewei servis + daeta</code></pre>
+      </section>
+
+      <!-- CONFIG REFERENCE -->
+      <section id="config-reference">
+        <h2>📋 Konfig Referens</h2>
+        <p>Kee konfigurayshun sekshunz:</p>
+        <ul>
+          <li><code>agents.defaults</code> — Defaalt ajent setingz</li>
+          <li><code>agents.list[]</code> — Multi-ajent konfigurayshunz</li>
+          <li><code>channels.*</code> — Chanul-spesifik konfig</li>
+          <li><code>gateway.*</code> — Gatewei servis setingz</li>
+          <li><code>models.providers.*</code> — Modl providr konfig</li>
+          <li><code>tools.*</code> — Tool poliseez n setingz</li>
+          <li><code>skills.*</code> — Skil konfigurayshun</li>
+          <li><code>plugins.*</code> — Plugin konfig</li>
+          <li><code>session.*</code> — Seshun manijment</li>
+          <li><code>messages.*</code> — Mesij formating</li>
+        </ul>
+      </section>
+
+      <!-- TEMPLATES -->
+      <section id="templates">
+        <h2>📝 Templats</h2>
+        <p>Defaalt werkspays templats:</p>
+        <ul>
+          <li><code>AGENTS.md</code> — Oprayting instrukshunz</li>
+          <li><code>TOOLS.md</code> — Tool yoosij guidence</li>
+          <li><code>USER.md</code> — Yuzr profiel</li>
+          <li><code>BOOTSTRAP.md</code> — Furst-run setup ritual</li>
+          <li><code>HEARTBEAT.md</code> — Hartbeet instrukshunz</li>
+          <li><code>SOUL.md</code> — Pursonalitee konfigurayshun</li>
+        </ul>
+      </section>
+
+      <!-- Footer -->
+      <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted);">
+        <p>🦞 Maed wif luv by da Opuncleh komunitee</p>
+        <p style="font-size: 0.875rem; margin-top: 0.5rem;">
+          <a href="https://github.com/opuncleh/opuncleh">GitHubb</a> · 
+          <a href="index.html">Hoempaj</a>
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function showInstall(type) {
+      document.querySelectorAll('.install-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.install-content').forEach(c => c.classList.remove('active'));
+      document.querySelector(`[onclick="showInstall('${type}')"]`).classList.add('active');
+      document.getElementById(`install-${type}`).classList.add('active');
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, null, this.getAttribute('href'));
+        }
+      });
+    });
+  </script>
+</body>
+</html>
