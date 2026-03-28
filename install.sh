@@ -1986,7 +1986,7 @@ can_resolve_registry_package_version() {
 resolve_package_install_spec() {
     local package_name="$1"
     local value="$2"
-    if [[ "${value,,}" == "main" ]]; then
+    if [[ "$(echo "$value" | tr '[:upper:]' '[:lower:]')" == "main" ]]; then
         echo "github:opuncleh/opuncleh#main"
         return 0
     fi
