@@ -627,51 +627,17 @@
         </section>
 
         <!-- Quick Start -->
-        <section class="quick-start">
-            <div class="container">
-                <div class="section-header">
-                    <h2>kwik strt</h2>
-                </div>
-                <div class="code-tabs">
-                    <div class="tab active" onclick="showTab('oneliner')">one-liner</div>
-                    <div class="tab" onclick="showTab('npm')">npm</div>
-                    <div class="tab" onclick="showTab('git')">git</div>
-                </div>
-                <div class="code-block" id="oneliner-code">
-                    <div class="code-comment"># wurks evrywher. instalz evrythin. yur welkum. 🦞</div>
-                    <div><span class="code-command">$</span> curl -fsSL https://raw.githubusercontent.com/opuncleh/opuncleh/main/install.sh | bash</div>
-                </div>
-                <div class="code-block" id="npm-code" style="display: none;">
-                    <div class="code-comment"># instol wit npm</div>
-                    <div><span class="code-command">$</span> npm install -g opuncleh</div>
-                    <div><span class="code-command">$</span> opuncleh onboard</div>
-                </div>
-                <div class="code-block" id="git-code" style="display: none;">
-                    <div class="code-comment"># klon an bild frum sors</div>
-                    <div><span class="code-command">$</span> git clone https://github.com/opuncleh/opuncleh.git</div>
-                    <div><span class="code-command">$</span> cd opuncleh && ./install.sh</div>
-                </div>
-                
-                <script>
-                function showTab(tab) {
-                    // Hide all code blocks
-                    document.getElementById('oneliner-code').style.display = 'none';
-                    document.getElementById('npm-code').style.display = 'none';
-                    document.getElementById('git-code').style.display = 'none';
-                    
-                    // Remove active class from all tabs
-                    var tabs = document.querySelectorAll('.tab');
-                    tabs.forEach(t => t.classList.remove('active'));
-                    
-                    // Show selected code block
-                    document.getElementById(tab + '-code').style.display = 'block';
-                    
-                    // Add active class to clicked tab
-                    event.target.classList.add('active');
-                }
-                </script>
-            </div>
-        </section>
+<section class="quick-start">
+    <div class="container">
+        <div class="section-header">
+            <h2>kwik strt</h2>
+        </div>
+        <div class="code-block" id="oneliner-code">
+            <div class="code-comment"># wurks evrywher. instalz evrythin. yur welkum. 🦞</div>
+            <div><span class="code-command">$</span> curl -fsSL https://opuncleh.com/install.sh | bash</div>
+        </div>
+    </div>
+</section>
 
         <!-- What It Does -->
         <section class="features">
