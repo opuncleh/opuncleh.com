@@ -274,32 +274,10 @@
             padding: 80px 0;
         }
         
-        .code-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-        
-        .tab {
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px 8px 0 0;
-            cursor: pointer;
-            font-size: 14px;
-            color: #999;
-        }
-        
-        .tab.active {
-            background: #00ff88;
-            color: #000;
-            border-color: #00ff88;
-        }
-        
         .code-block {
             background: rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0 12px 12px 12px;
+            border-radius: 12px;
             padding: 24px;
             font-family: 'Monaco', 'Courier New', monospace;
             font-size: 14px;
@@ -308,10 +286,40 @@
         
         .code-comment {
             color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .code-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .code-command {
             color: #ff3366;
+        }
+        
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #999;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border-color: #ff3366;
+        }
+        
+        .copy-btn.copied {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+            color: #00ff88;
         }
         
         /* Features */
@@ -548,6 +556,16 @@
                 overflow-x: auto;
             }
             
+            .code-line {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .copy-btn {
+                align-self: flex-end;
+            }
+            
             .link-buttons {
                 flex-direction: column;
                 gap: 16px;
@@ -624,20 +642,23 @@
                 <div class="tagline">smertist, dembest ai</div>
                 <p class="hero-desc">kleers yur inbox, sendz emalez, manijiz yur kalendr, cheks yu in for flytz.<br>al frum wutsapp, telegrem, or eny chat app yu olredy yooz.</p>
             </div>
-        </section>
+        </section> 
 
         <!-- Quick Start -->
-<section class="quick-start">
-    <div class="container">
-        <div class="section-header">
-            <h2>kwik strt</h2>
-        </div>
-        <div class="code-block" id="oneliner-code">
-            <div class="code-comment"># wurks evrywher. instalz evrythin. yur welkum. 🦞</div>
-            <div><span class="code-command">$</span> curl -fsSL https://opuncleh.com/install.sh | bash</div>
-        </div>
-    </div>
-</section>
+        <section class="quick-start">
+            <div class="container">
+                <div class="section-header">
+                    <h2>kwik strt</h2>
+                </div>
+                <div class="code-block" id="oneliner-code">
+                    <div class="code-comment"># wurks evrywher. instalz evrythin. yur welkum. 🦞</div>
+                    <div class="code-line">
+                        <span><span class="code-command">$</span> curl -fsSL https://opuncleh.com/install.sh | bash</span>
+                        <button class="copy-btn" onclick="copyCommand()">copy</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- What It Does -->
         <section class="features">
@@ -739,5 +760,18 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        function copyCommand() {
+            navigator.clipboard.writeText('curl -fsSL https://opuncleh.com/install.sh | bash');
+            const btn = document.querySelector('.copy-btn');
+            btn.textContent = 'copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'copy';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+    </script>
 </body>
 </html>
