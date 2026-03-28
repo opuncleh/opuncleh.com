@@ -622,12 +622,12 @@
         <div id="install-installer" class="install-content active">
           <p>Da <strong>instalr skript</strong> iz da rekomended wae. It handlz Node detekshun, instalayshun, n onbording in wun step.</p>
           <h4>makOS / Linuks / WSL2:</h4>
-          <pre><code>curl -fsSL https://opuncleh.com/install.sh | bash</code></pre>
+          <pre><code>curl -fsSL https://opuncleh.com/install.sh | bash -s -- --install-method git</code></pre>
           <h4>Windoez (PawerShel):</h4>
           <pre><code>irm https://opuncleh.com/install.ps1 | iex</code></pre>
           <p>Dats it — da skript handlz Node detekshun, instalayshun, n onbording.</p>
           <p>2 skip onbording n just instol da binree:</p>
-          <pre><code>curl -fsSL https://opuncleh.com/install.sh | bash -s -- --skip-onboarding</code></pre>
+          <pre><code>curl -fsSL https://opuncleh.com/install.sh | bash -s -- --install-method git --skip-onboarding</code></pre>
         </div>
 
         <div id="install-npm" class="install-content">
