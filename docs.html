@@ -614,8 +614,7 @@
         <h3>Instol Mefods</h3>
         <div class="install-tabs">
           <button class="install-tab active" onclick="showInstall('installer')">Instalr Skript</button>
-          <button class="install-tab" onclick="showInstall('npm')">npm</button>
-          <button class="install-tab" onclick="showInstall('pnpm')">pnpm</button>
+
           <button class="install-tab" onclick="showInstall('source')">Frum Sors</button>
         </div>
 
@@ -629,20 +628,7 @@
           <p>2 skip onbording n just instol da binree:</p>
           <pre><code>curl -fsSL https://opuncleh.com/install.sh | bash -s -- --install-method git --skip-onboarding</code></pre>
         </div>
-
-        <div id="install-npm" class="install-content">
-          <pre><code>npm install -g @opuncleh/opuncleh
-opuncleh onboard --install-daemon</code></pre>
-        </div>
-
-        <div id="install-pnpm" class="install-content">
-          <pre><code>pnpm add -g @opuncleh/opuncleh
-pnpm approve-builds -g  # aproov opuncleh, node-llama-cpp, sharp, etc.
-opuncleh onboard --install-daemon</code></pre>
-          <div class="alert alert-warning">
-            <strong>⚠️ Noet:</strong> pnpm rekwierz eksplisit aprooval 4 pakijs wif bild skripts. Aftr da furst instol showz da "Ignord bild skripts" worning, run <code>pnpm approve-builds -g</code> n selekt da listd pakijs.
-          </div>
-        </div>
+        
 
         <div id="install-source" class="install-content">
           <p>4 kontribyutrz or anywun hoo wants 2 run frum a lokul chekout:</p>
