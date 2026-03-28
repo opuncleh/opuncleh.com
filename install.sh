@@ -1974,7 +1974,7 @@ can_resolve_registry_package_version() {
     if [[ -z "$value" ]]; then
         return 0
     fi
-    if [[ "${value,,}" == "main" ]]; then
+    if [[ "$(echo "$value" | tr '[:upper:]' '[:lower:]')" == "main" ]]; then
         return 1
     fi
     if is_explicit_package_install_spec "$value"; then
