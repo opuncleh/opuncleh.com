@@ -1820,10 +1820,31 @@ warn_shell_path_missing_dir() {
     echo ""
     ui_warn "PATH missing ${label}: ${dir}"
     echo "  This can make opuncleh show as \"command not found\" in new terminals."
-    echo "  Fix (zsh: ~/.zshrc, bash: ~/.bashrc):"
-    echo "    export PATH=\"${dir}:\$PATH\""
+    
+    # Auto-add to shell config
+    local shell_rc=""
+    if [[ "$SHELL" == *"zsh"* ]] || [[ -f "$HOME/.zshrc" ]]; then
+        shell_rc="$HOME/.zshrc"
+    elif [[ -f "$HOME/.bash_profile" ]]; then
+        shell_rc="$HOME/.bash_profile"
+    elif [[ -f "$HOME/.bashrc" ]]; then
+        shell_rc="$HOME/.bashrc"
+    fi
+    
+    if [[ -n "$shell_rc" ]]; then
+        local export_line="export PATH=\"${dir}:\$PATH\""
+        if ! grep -qF "$dir" "$shell_rc" 2>/dev/null; then
+            echo "" >> "$shell_rc"
+            echo "# Added by Opuncleh installer" >> "$shell_rc"
+            echo "$export_line" >> "$shell_rc"
+            ui_success "Added PATH to $shell_rc"
+            echo "  Restart your terminal or run: source $shell_rc"
+        fi
+    else
+        echo "  Fix (zsh: ~/.zshrc, bash: ~/.bashrc):"
+        echo "    export PATH=\"${dir}:\$PATH\""
+    fi
 }
-
 ensure_npm_global_bin_on_path() {
     local bin_dir=""
     bin_dir="$(npm_global_bin_dir || true)"
