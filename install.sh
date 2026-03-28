@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Opuncleh Installer for macOS and Linux
-# Usage: curl -fsSL --proto '=https' --tlsv1.2 https://opuncleh.com/install.sh | bash
+# Usage: curl -fsSL https://opuncleh.com/install.sh | bash -s -- --install-method git
 
 BOLD='\033[1m'
 ACCENT='\033[38;2;255;77;77m'       # coral-bright  #ff4d4d
