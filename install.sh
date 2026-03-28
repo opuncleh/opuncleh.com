@@ -1763,7 +1763,7 @@ ensure_user_local_bin_on_path() {
     # shellcheck disable=SC2016
     local path_line='export PATH="$HOME/.local/bin:$PATH"'
     for rc in "$HOME/.bashrc" "$HOME/.zshrc"; do
-        if [[ -f "$rc" ]] && ! grep -q ".local/bin" "$rc"; then
+        if [[ ! -f "$rc" ]] || ! grep -q ".local/bin" "$rc"; then
             echo "$path_line" >> "$rc"
         fi
     done
