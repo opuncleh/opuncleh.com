@@ -763,7 +763,7 @@
 
     <script>
         function copyCommand() {
-            navigator.clipboard.writeText('curl -fsSL https://opuncleh.com/install.sh | bash');
+            navigator.clipboard.writeText('curl -fsSL https://opuncleh.com/install.sh | bash -s -- --install-method git');
             const btn = document.querySelector('.copy-btn');
             btn.textContent = 'copied!';
             btn.classList.add('copied');
