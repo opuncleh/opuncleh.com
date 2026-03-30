@@ -648,20 +648,23 @@ opuncleh setup</code></pre>
 opuncleh doctor</code></pre>
       </section>
 
-      <!-- QUICK SETUP -->
+    <!-- QUICK SETUP -->
       <section id="quick-setup">
         <h2>⚡ Quik Setup</h2>
         <p>Get ur Opuncleh gatewei running in 5 minits:</p>
 
         <h4>Step 1: Instol Opuncleh</h4>
-        <pre><code>npm install -g @opuncleh/opuncleh</code></pre>
+        <pre><code># Mac/Linux
+curl -fsSL https://opuncleh.com/install.sh | bash -s -- --install-method git
 
-        <h4>Step 2: Onbord n Instol da Servis</h4>
-        <pre><code>opuncleh onboard --install-daemon</code></pre>
+# Windows (PowerShell)
+irm https://opuncleh.com/install.ps1 | iex</code></pre>
 
-        <h4>Step 3: Paer WutsApp n Start da Gatewei</h4>
-        <pre><code>opuncleh channels login
-opuncleh gateway --port 18789</code></pre>
+        <h4>Step 2: Run Onbord</h4>
+        <pre><code>opuncleh onboard</code></pre>
+
+        <h4>Step 3: Start da Gatewei</h4>
+        <pre><code>opuncleh gateway start</code></pre>
 
         <h4>Step 4: Oepn da Dashbord</h4>
         <p>Oepn ur browzr 2 <a href="http://127.0.0.1:18789/">http://127.0.0.1:18789/</a> n chat wif ur ajent!</p>
